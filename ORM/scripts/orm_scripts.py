@@ -7,11 +7,4 @@ from pprint import pprint
 
 def run():
 
-    user = User.objects.first()
-    restaurant = Restaurant.objects.first()
-
-    rating, created = Rating.objects.get_or_create(
-        user=user, restaurant=restaurant, rating=4
-    )
-
-    pprint(connection.queries)
+    pass
