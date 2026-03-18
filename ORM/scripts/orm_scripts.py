@@ -8,6 +8,6 @@ def run():
 
     
     restaurant = Restaurant.objects.first()
-    print(restaurant.rating_set.all())
+    print(restaurant.ratings.all())
     pprint(connection.queries)
     
