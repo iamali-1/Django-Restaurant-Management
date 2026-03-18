@@ -1,7 +1,13 @@
-from ORM.models import Restaurant
+from ORM.models import Restaurant, Rating
 from django.utils import timezone
-
+from django.db import connection
+from django.contrib.auth.models import User
+from pprint import pprint
 
 def run():
-    restaurant = Restaurant.objects.all()
-    print(restaurant)
+
+    
+    restaurant = Restaurant.objects.first()
+    print(restaurant.rating_set.all())
+    pprint(connection.queries)
+    

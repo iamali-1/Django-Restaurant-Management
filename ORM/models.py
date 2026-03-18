@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.utils import timezone
 
 class Restaurant(models.Model):
     class TypeChoices(models.TextChoices):
@@ -14,7 +14,7 @@ class Restaurant(models.Model):
 
     name = models.CharField(max_length=100)
     website = models.URLField(default="")
-    date_opened = models.DateField
+    date_opened = models.DateField(timezone.now)
     latitude = models.FloatField()
     longitude = models.FloatField()
     restaurant_type = models.CharField(max_length=2, choices=TypeChoices.choices)
@@ -25,7 +25,7 @@ class Restaurant(models.Model):
 
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name= "ratings")
     rating = models.PositiveSmallIntegerField()
 
     def __str__(self):
