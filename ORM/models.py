@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
-
 class Restaurant(models.Model):
     class TypeChoices(models.TextChoices):
         INDIAN = "IN", "Indian"
@@ -28,6 +27,10 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        print(self._state.adding)
+        super().save(*args, **kwargs)
 
 
 class Rating(models.Model):
