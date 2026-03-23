@@ -7,4 +7,6 @@ from pprint import pprint
 
 def run():
 
-    pass
+    restaurants = Sale.objects.order_by('-datetimes')
+    pprint(restaurants)
+    pprint(connection.queries)

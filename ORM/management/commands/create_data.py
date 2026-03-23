@@ -53,5 +53,5 @@ class Command(BaseCommand):
             Sale.objects.create(
                 restaurant=random.choice(restaurants),
                 income=random.uniform(5, 100),
-                datetime=timezone.now() - timezone.timedelta(days=random.randint(1,50))
+                date_time=timezone.now() - timezone.timedelta(days=random.randint(1,50))
             )
