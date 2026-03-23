@@ -1,15 +1,10 @@
 from django.shortcuts import render
-from .forms import RatingForm
+from .forms import RestaurantForm
+from .models import Restaurant, Rating, Sale
 
 
 # Create your views here.
 def index(request):
-
-    if request.method == "POST":
-        form = RatingForm(request.POST or None)
-        if form.is_valid():
-            form.save()
-        else:
-            return render(request, "index.html", {"form": form})
-        context = {"form": RatingForm()}
+    restaurants = Restaurant.objects.all()
+    context = {"restaurants": restaurants}
     return render(request, "index.html", context)

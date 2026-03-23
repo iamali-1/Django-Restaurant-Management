@@ -7,6 +7,6 @@ from pprint import pprint
 
 def run():
 
-    restaurants = Restaurant.objects.all()
+    restaurants = Rating.objects.filter(restaurant__name__startswith = 'c')
     pprint(restaurants)
     pprint(connection.queries)
