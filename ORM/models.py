@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
-
+from django.db.models.functions import Lower
 
 class Restaurant(models.Model):
     class TypeChoices(models.TextChoices):
@@ -24,6 +24,9 @@ class Restaurant(models.Model):
         validators=[MinValueValidator(-180), MaxValueValidator(180)]
     )
     restaurant_type = models.CharField(max_length=2, choices=TypeChoices.choices)
+
+    class Meta:
+        ordering = [Lower('name')]
 
     def __str__(self):
         return self.name
