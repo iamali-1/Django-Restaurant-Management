@@ -7,8 +7,4 @@ from pprint import pprint
 
 def run():
 
-    restuarant = Restaurant.objects.filter(name__startswith="P")
-
-    restuarant.update(date_opened=timezone.now() - timezone.timedelta(days=365))
-    pprint(restuarant)
-    pprint(connection.queries)
+    pass
