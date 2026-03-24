@@ -5,6 +5,6 @@ from .models import Restaurant, Rating, Sale
 
 # Create your views here.
 def index(request):
-    restaurants = Restaurant.objects.all()
+    restaurants = Restaurant.objects.prefetch_related('ratings')
     context = {"restaurants": restaurants}
     return render(request, "index.html", context)
