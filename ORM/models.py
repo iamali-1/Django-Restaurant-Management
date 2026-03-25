@@ -39,6 +39,8 @@ class Staff(models.Model):
     name = models.CharField(max_length=128)
     restaurant = models.ManyToManyField(Restaurant)
 
+    def __str__(self):
+        return self.name
 
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
