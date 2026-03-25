@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models.functions import Lower
 
+
 class Restaurant(models.Model):
     class TypeChoices(models.TextChoices):
         INDIAN = "IN", "Indian"
@@ -26,7 +27,7 @@ class Restaurant(models.Model):
     restaurant_type = models.CharField(max_length=2, choices=TypeChoices.choices)
 
     class Meta:
-        ordering = [Lower('name')]
+        ordering = [Lower("name")]
 
     def __str__(self):
         return self.name
@@ -35,12 +36,19 @@ class Restaurant(models.Model):
         print(self._state.adding)
         super().save(*args, **kwargs)
 
+
 class Staff(models.Model):
     name = models.CharField(max_length=128)
-    restaurant = models.ManyToManyField(Restaurant)
+    restaurant = models.ManyToManyField(Restaurant, through="StaffRestaurant")
 
     def __str__(self):
         return self.name
+
+
+class StaffRestaurant(models.Model):
+    staff = models.ForeignKey(Staff, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+
 
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
